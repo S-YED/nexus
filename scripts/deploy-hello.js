@@ -42,7 +42,7 @@ async function main() {
     console.log("   Message:", message);
 
     const info = await helloWorld.getInfo();
-    console.log("   Owner:", info[0]);
+    console.log("   Owner:", info[1]);
     console.log("   Deployment timestamp:", new Date(Number(info[2]) * 1000).toLocaleString());
 
     console.log("\n" + "=".repeat(60));
