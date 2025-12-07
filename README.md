@@ -58,20 +58,37 @@ nexusbank-mvp/
 
 ---
 
-## 🚀 Quick Start
+## 🎬 Live Demo & POC
+
+**📺 Want to see it in action?** Check out our comprehensive [Proof of Concept Guide](docs/POC.md) with:
+- Live demo scenarios
+- Complete walkthrough videos
+- Hackathon judge demo script
+- Technical deep-dive
+
+**⚡ Quick Demo (2 minutes)**:
+1. Visit our live deployment on Coston2
+2. Connect MetaMask
+3. Browse existing pools or create your own
+4. See real blockchain transactions!
+
+---
+
+## 🚀 Quick Start (5 Minutes)
+
+> **💡 Tip**: For detailed setup instructions and troubleshooting, see our [POC Guide](docs/POC.md)
 
 ### Prerequisites
 
-- Node.js v18+
-- npm or yarn
-- MetaMask browser extension
-- Git
+- ✅ Node.js v18+ ([Download](https://nodejs.org/))
+- ✅ MetaMask browser extension ([Install](https://metamask.io/))
+- ✅ Git ([Download](https://git-scm.com/))
 
-### 1. Clone & Install
+### 1. Clone & Install (1 min)
 
 ```bash
 # Clone repository
-git clone <your-repo-url>
+git clone https://github.com/your-username/nexusbank-mvp.git
 cd nexusbank-mvp
 
 # Install backend dependencies
@@ -83,19 +100,65 @@ npm install
 cd ..
 ```
 
-### 2. Environment Setup
-
-Create `.env` file in root:
+### 2. Environment Setup (1 min)
 
 ```bash
-PRIVATE_KEY=your_private_key_here
+# Copy environment template
+cp .env.example .env
+
+# Edit .env and add your MetaMask private key
+# Get private key: MetaMask → Account Details → Show Private Key
+# ⚠️ Use TESTNET wallet only!
 ```
 
-### 3. Get Test Tokens
+Your `.env` should look like:
+```bash
+PRIVATE_KEY=your_64_character_private_key_here
+COSTON2_RPC_URL=https://coston2-api.flare.network/ext/C/rpc
+NEXUS_CIRCLE_ADDRESS=0x57af01c82C08dFcA050A8d7bc5477fc538aBD7D4
+```
 
-Visit [Flare Coston2 Faucet](https://faucet.flare.network/coston2) and request test C2FLR tokens.
+### 3. Get Test Tokens (1 min)
 
-### 4. Deploy Contracts
+1. Visit: [https://faucet.flare.network/coston2](https://faucet.flare.network/coston2)
+2. Paste your wallet address
+3. Request 100 C2FLR tokens
+4. Wait ~30 seconds for confirmation
+
+### 4. Start Application (1 min)
+
+```bash
+# Start frontend (in project root)
+cd frontend
+npm run dev
+```
+
+**🎉 Done!** Open [http://localhost:5173](http://localhost:5173) and connect your MetaMask wallet!
+
+### 5. Try the Demo (1 min)
+
+Our contracts are already deployed on Coston2, so you can:
+- ✅ Browse existing pools (Pool #0, Pool #1)
+- ✅ Join a pool (costs 1-10 C2FLR collateral)
+- ✅ Create your own pool
+- ✅ See real blockchain transactions
+
+**Contract Address**: [`0x57af01c82C08dFcA050A8d7bc5477fc538aBD7D4`](https://coston2-explorer.flare.network/address/0x57af01c82C08dFcA050A8d7bc5477fc538aBD7D4)
+
+---
+
+## 📺 Demo Scenarios
+
+See our [POC Guide](docs/POC.md) for detailed walkthroughs:
+
+1. **[Create Your First Pool](docs/POC.md#scenario-1-create-your-first-pool)** - Step-by-step pool creation
+2. **[Join Existing Pool](docs/POC.md#scenario-2-join-an-existing-pool)** - Become a pool member
+3. **[Multi-Wallet Testing](docs/POC.md#scenario-3-multi-wallet-testing)** - Test with multiple accounts
+4. **[Filter & Search](docs/POC.md#scenario-4-filter--search-pools)** - Explore pool filtering
+
+### Optional: Deploy Your Own Contracts
+
+If you want to deploy your own contract instance:
 
 ```bash
 # Compile contracts
@@ -103,16 +166,9 @@ npx hardhat compile
 
 # Deploy to Coston2 testnet
 npx hardhat run scripts/deployment/deploy-nexus-circle.js --network coston2
+
+# Update NEXUS_CIRCLE_ADDRESS in .env with new address
 ```
-
-### 5. Start Frontend
-
-```bash
-cd frontend
-npm run dev
-```
-
-Visit `http://localhost:5173` and connect your MetaMask wallet!
 
 ---
 
@@ -187,11 +243,18 @@ node scripts/testing/demo-nexus-circle-epic4.js
 
 Comprehensive documentation is available in the `docs/` directory:
 
-- **[Quick Start Guide](docs/QUICK_START.md)** - Get started quickly
-- **[Architecture](docs/ARCHITECTURE.md)** - Technical architecture
+### For Users
+- **[POC Guide](docs/POC.md)** - 🎬 **START HERE!** Complete demo walkthrough
+- **[Quick Start Guide](docs/QUICK_START.md)** - Get up and running fast
+- **[Troubleshooting](docs/TROUBLESHOOTING.md)** - Common issues & solutions
+
+### For Developers
+- **[Contributing Guide](CONTRIBUTING.md)** - How to contribute to the project
+- **[Architecture](docs/ARCHITECTURE.md)** - Technical architecture deep-dive
 - **[Blockchain Integration](docs/BLOCKCHAIN_INTEGRATION.md)** - Smart contract details
 - **[Deployment Guide](docs/DEPLOYMENT_GUIDE.md)** - Deploy to production
-- **[Troubleshooting](docs/TROUBLESHOOTING.md)** - Common issues & solutions
+
+### Background & Context
 - **[ROSCA Concept](docs/ROSCA_CONCEPT.md)** - Understanding ROSCAs
 - **[Project Status](docs/PROJECT_STATUS.md)** - Current development status
 
@@ -305,13 +368,39 @@ For more solutions, see [TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md)
 
 ## 👥 Contributing
 
-Contributions are welcome! Please:
+We welcome contributions from developers of all skill levels!
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
+### How to Contribute
+
+1. Read our **[Contributing Guide](CONTRIBUTING.md)** for detailed instructions
+2. Check [open issues](https://github.com/your-username/nexusbank-mvp/issues) for tasks
+3. Look for "good first issue" labels for beginner-friendly tasks
+
+### Quick Contribution Guide
+
+```bash
+# 1. Fork and clone
+git clone https://github.com/YOUR_USERNAME/nexusbank-mvp.git
+
+# 2. Create a branch
+git checkout -b feature/your-feature-name
+
+# 3. Make changes and test
+npx hardhat test
+cd frontend && npm run build
+
+# 4. Commit and push
+git commit -m "feat: add amazing feature"
+git push origin feature/your-feature-name
+
+# 5. Create Pull Request on GitHub
+```
+
+See **[CONTRIBUTING.md](CONTRIBUTING.md)** for:
+- Coding standards
+- Commit message format
+- Testing guidelines
+- PR process
 
 ---
 
