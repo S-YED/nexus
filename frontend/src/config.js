@@ -49,7 +49,7 @@ export const UI_CONFIG = {
   priceRefreshInterval: 30000, // 30 seconds
 
   // Display formats
-  priceDecimals: 2,
+  priceDecimals: 5,
   tokenDecimals: 4,
 
   // Faucet URL
