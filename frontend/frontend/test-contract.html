@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Contract</title>
+    <script src="https://cdn.ethers.io/lib/ethers-5.7.2.umd.min.js"></script>
+</head>
+<body>
+    <h1>Test Contract Deployment</h1>
+    <button onclick="testContract()">Test Contract</button>
+    <pre id="output"></pre>
+
+    <script>
+        async function testContract() {
+            const output = document.getElementById('output');
+
+            try {
+                // Connect to Coston2
+                const provider = new ethers.providers.JsonRpcProvider('https://coston2-api.flare.network/ext/C/rpc');
+                const contractAddress = '0x3bE24594e9c7d3386AbFa26Ccc6E57e2A8EaAE4e';
+
+                // Check if contract has code
+                const code = await provider.getCode(contractAddress);
+                output.textContent = 'Contract code length: ' + code.length + '\n';
+                output.textContent += 'Has code: ' + (code !== '0x') + '\n\n';
+
+                if (code === '0x') {
+                    output.textContent += 'ERROR: No contract deployed at this address!\n';
+                    return;
+                }
+
+                // Simple ABI to test poolCount
+                const abi = [
+                    "function poolCount() view returns (uint256)",
+                    "function MAX_MEMBERS() view returns (uint256)",
+                    "function COLLATERAL_PERCENT() view returns (uint256)"
+                ];
+
+                const contract = new ethers.Contract(contractAddress, abi, provider);
+
+                // Try to call poolCount
+                const poolCount = await contract.poolCount();
+                output.textContent += 'Pool count: ' + poolCount.toString() + '\n';
+
+                const maxMembers = await contract.MAX_MEMBERS();
+                output.textContent += 'Max members: ' + maxMembers.toString() + '\n';
+
+                const collateral = await contract.COLLATERAL_PERCENT();
+                output.textContent += 'Collateral %: ' + collateral.toString() + '\n';
+
+                output.textContent += '\n✅ Contract is working!\n';
+
+            } catch (error) {
+                output.textContent += '\n❌ Error: ' + error.message + '\n';
+                console.error(error);
+            }
+        }
+    </script>
+</body>
+</html>

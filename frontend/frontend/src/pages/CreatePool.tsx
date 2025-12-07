@@ -110,18 +110,6 @@ const CreatePool = () => {
                 <p className="text-xs text-muted-foreground mt-1">Fixed at 6 members for MVP</p>
               </div>
 
-              <div>
-                <Label htmlFor="collateralPercent">Collateral Requirement (%) *</Label>
-                <Input
-                  id="collateralPercent"
-                  type="number"
-                  value={formData.collateralPercent}
-                  disabled
-                  className="mt-2"
-                />
-                <p className="text-xs text-muted-foreground mt-1">Fixed at 10% for security</p>
-              </div>
-
               <Card className="bg-secondary/50 p-4">
                 <div className="flex items-start gap-2 mb-3">
                   <Info className="h-4 w-4 text-primary mt-0.5" />
@@ -133,10 +121,6 @@ const CreatePool = () => {
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Monthly Contribution:</span>
                     <span className="font-semibold">{formData.contributionAmount || '0'} FLR</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Required Collateral:</span>
-                    <span className="font-semibold text-primary">{calculateCollateral()} FLR</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Total Pool Size:</span>
