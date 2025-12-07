@@ -1,7 +1,7 @@
 import { useWallet } from "@/hooks/useWallet";
 import { usePools } from "@/hooks/usePools";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -9,8 +9,21 @@ import { Users, ArrowLeft, Plus } from "lucide-react";
 
 const BrowsePools = () => {
   const { wallet } = useWallet();
-  const { pools, loading, error } = usePools();
+  const { pools, loading, error, getActivePools, getPoolsSortedByDate } = usePools();
   const navigate = useNavigate();
+  const [sortBy, setSortBy] = useState<'all' | 'active' | 'newest'>('all');
+
+  // Get sorted/filtered pools based on selection
+  const displayPools = useMemo(() => {
+    switch (sortBy) {
+      case 'active':
+        return getActivePools();
+      case 'newest':
+        return getPoolsSortedByDate();
+      default:
+        return pools;
+    }
+  }, [pools, sortBy, getActivePools, getPoolsSortedByDate]);
 
   useEffect(() => {
     if (!wallet.isConnected) {
@@ -89,15 +102,45 @@ const BrowsePools = () => {
         </Card>
 
         {/* Available Pools */}
-        <div className="mb-6">
-          <h2 className="text-2xl font-bold mb-4">Available Pools ({pools.length})</h2>
-          {pools.length === 0 && (
-            <p className="text-muted-foreground text-center py-8">No pools available. Create the first one!</p>
-          )}
+        <div className="mb-6 flex items-center justify-between">
+          <h2 className="text-2xl font-bold">Available Pools ({displayPools.length})</h2>
+
+          {/* Sort/Filter Options */}
+          <div className="flex gap-2">
+            <Button
+              variant={sortBy === 'all' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => setSortBy('all')}
+            >
+              All ({pools.length})
+            </Button>
+            <Button
+              variant={sortBy === 'active' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => setSortBy('active')}
+            >
+              Active Only
+            </Button>
+            <Button
+              variant={sortBy === 'newest' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => setSortBy('newest')}
+            >
+              Newest First
+            </Button>
+          </div>
         </div>
 
+        {displayPools.length === 0 && (
+          <p className="text-muted-foreground text-center py-8">
+            {pools.length === 0
+              ? 'No pools available. Create the first one!'
+              : 'No pools match the selected filter.'}
+          </p>
+        )}
+
         <div className="grid md:grid-cols-2 gap-6">
-          {pools.map((pool) => (
+          {displayPools.map((pool) => (
             <Card key={pool.id} className="bg-glass p-6 hover:border-primary/30 transition-colors">
               <div className="flex items-start justify-between mb-4">
                 <div>

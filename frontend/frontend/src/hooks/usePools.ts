@@ -148,12 +148,42 @@ export const usePools = () => {
     }
   };
 
+  // Utility functions for filtering/sorting
+  const getActivePools = useCallback(() => {
+    return pools.filter(p => p.status === 'active');
+  }, [pools]);
+
+  const getPoolsSortedByDate = useCallback(() => {
+    return [...pools].sort((a, b) => b.id - a.id); // Newest first
+  }, [pools]);
+
+  const getPoolsByContribution = useCallback((min?: number, max?: number) => {
+    return pools.filter(p => {
+      if (min && p.contributionAmount < min) return false;
+      if (max && p.contributionAmount > max) return false;
+      return true;
+    });
+  }, [pools]);
+
+  const searchPools = useCallback((query: string) => {
+    const lowerQuery = query.toLowerCase();
+    return pools.filter(p =>
+      p.name.toLowerCase().includes(lowerQuery) ||
+      p.creator.toLowerCase().includes(lowerQuery)
+    );
+  }, [pools]);
+
   return {
     pools,
     createPool,
     joinPool,
     loading,
     error,
-    refetch: fetchPools
+    refetch: fetchPools,
+    // Filtering/Sorting utilities
+    getActivePools,
+    getPoolsSortedByDate,
+    getPoolsByContribution,
+    searchPools
   };
 };

@@ -1,8 +1,8 @@
 import { ethers } from 'ethers';
 import { NEXUS_CIRCLE_ABI } from '../contracts/NexusCircleABI';
 
-// Contract address from deployment
-export const NEXUS_CIRCLE_ADDRESS = '0x3bE24594e9c7d3386AbFa26Ccc6E57e2A8EaAE4e';
+// Contract address from deployment (Epic 5 - with collateral)
+export const NEXUS_CIRCLE_ADDRESS = '0x57af01c82C08dFcA050A8d7bc5477fc538aBD7D4';
 
 // Flare Coston2 testnet configuration
 export const COSTON2_CONFIG = {
@@ -144,22 +144,32 @@ class BlockchainService {
     if (!this.contract) await this.initialize();
 
     const contributionWei = ethers.parseEther(contributionAmount);
+    // Epic 5: Calculate 10% collateral
+    const collateralWei = (contributionWei * 10n) / 100n;
 
     console.log('Creating pool with:', {
       contributionAmount,
       contributionWei: contributionWei.toString(),
-      note: 'Epic 3 contract - NO COLLATERAL required'
+      collateralWei: collateralWei.toString(),
+      collateralAmount: ethers.formatEther(collateralWei) + ' C2FLR',
+      note: 'Epic 5 contract - 10% COLLATERAL required'
     });
 
-    // Check user balance for gas only
+    // Check user balance for collateral + gas
     const balance = await this.provider!.getBalance(await this.signer!.getAddress());
     console.log('User balance:', ethers.formatEther(balance), 'C2FLR');
 
-    try {
-      // Epic 3 version - no collateral, no value needed
-      console.log('Calling createPool (Epic 3 - no collateral)');
+    if (balance < collateralWei) {
+      throw new Error(`Insufficient balance. Need ${ethers.formatEther(collateralWei)} C2FLR for collateral, have ${ethers.formatEther(balance)}`);
+    }
 
-      const tx = await this.contract!.createPool(contributionWei);
+    try {
+      // Epic 5 version - send 10% collateral as value
+      console.log('Calling createPool with collateral value');
+
+      const tx = await this.contract!.createPool(contributionWei, {
+        value: collateralWei
+      });
 
       console.log('Transaction sent:', tx.hash);
       const receipt = await tx.wait();
@@ -206,19 +216,30 @@ class BlockchainService {
   async joinPool(poolId: number, contributionAmount: bigint): Promise<string> {
     if (!this.contract) await this.initialize();
 
+    // Epic 5: Calculate 10% collateral
+    const collateralWei = (contributionAmount * 10n) / 100n;
+
     console.log('Joining pool:', {
       poolId,
       contributionAmount: contributionAmount.toString(),
-      note: 'Epic 3 contract - NO COLLATERAL required'
+      collateralWei: collateralWei.toString(),
+      collateralAmount: ethers.formatEther(collateralWei) + ' C2FLR',
+      note: 'Epic 5 contract - 10% COLLATERAL required'
     });
 
-    // Check user balance for gas only
+    // Check user balance for collateral + gas
     const balance = await this.provider!.getBalance(await this.signer!.getAddress());
     console.log('User balance:', ethers.formatEther(balance), 'C2FLR');
 
+    if (balance < collateralWei) {
+      throw new Error(`Insufficient balance. Need ${ethers.formatEther(collateralWei)} C2FLR for collateral, have ${ethers.formatEther(balance)}`);
+    }
+
     try {
-      // Epic 3 version - no collateral needed
-      const tx = await this.contract!.joinPool(poolId);
+      // Epic 5 version - send 10% collateral as value
+      const tx = await this.contract!.joinPool(poolId, {
+        value: collateralWei
+      });
 
       console.log('Transaction sent:', tx.hash);
       const receipt = await tx.wait();
