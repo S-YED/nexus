@@ -74,7 +74,14 @@ https://faucet.flare.network/coston2
 0xb8b38373324be739bb1aac99751a58d46b290d50
 
 # Request 100 C2FLR tokens
+
+# Add Private  Key to the Hardhat(Line 20).
+
+      accounts: process.env.PRIVATE_KEY && process.env.PRIVATE_KEY !== "YOUR_PRIVATE_KEY"
+
 ```
+
+
 
 ### 4. Deploy HelloWorld Contract
 ```bash
