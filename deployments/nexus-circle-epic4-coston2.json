@@ -1,0 +1,20 @@
+{
+  "network": "coston2",
+  "contractAddress": "0xb29C633b081A3Bff06cCc1332167CA41E5e6B6cE",
+  "deployer": "0xB8b38373324Be739Bb1aAc99751a58d46b290d50",
+  "deployedAt": "2025-12-07T02:04:28.104Z",
+  "blockNumber": 24771518,
+  "epic": "Epic 4 - Core Logic",
+  "features": [
+    "Pool creation",
+    "Member management (6-person pools)",
+    "Monthly contributions",
+    "Round-robin payout distribution",
+    "Pool completion detection",
+    "Member status tracking"
+  ],
+  "constants": {
+    "maxMembers": 6,
+    "collateralPercent": 10
+  }
+}
