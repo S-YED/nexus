@@ -1,0 +1,30 @@
+{
+  "contractName": "NexusCircle",
+  "contractAddress": "0x57af01c82C08dFcA050A8d7bc5477fc538aBD7D4",
+  "ftsoAddress": "0x3d893C53D9e8056135C26C8c638B76C8b60Df726",
+  "deployer": "0xB8b38373324Be739Bb1aAc99751a58d46b290d50",
+  "network": "Coston2",
+  "chainId": 114,
+  "deploymentTime": "2025-12-07T03:14:15.402Z",
+  "blockNumber": 24773210,
+  "blockExplorer": "https://coston2-explorer.flare.network/address/0x57af01c82C08dFcA050A8d7bc5477fc538aBD7D4",
+  "epic": "Epics 3, 4, & 5 Complete",
+  "version": "1.0.0 - Final",
+  "features": [
+    "Pool creation with collateral requirement (10%)",
+    "Member management (6-person pools, can shrink on default)",
+    "Monthly contributions with validation",
+    "Round-robin payout distribution",
+    "Pool completion detection",
+    "FTSO integration for price feeds",
+    "Time-based default detection (1 hour deadline)",
+    "Collateral liquidation for defaulters",
+    "Collateral return on pool completion"
+  ],
+  "constants": {
+    "maxMembers": 6,
+    "collateralPercent": 10,
+    "contributionDeadline": 3600,
+    "flrUsdFeedId": "0x01464c522f55534400000000000000000000000000"
+  }
+}

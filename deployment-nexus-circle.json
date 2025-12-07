@@ -1,0 +1,12 @@
+{
+  "contractName": "NexusCircle",
+  "contractAddress": "0x3bE24594e9c7d3386AbFa26Ccc6E57e2A8EaAE4e",
+  "deployer": "0xB8b38373324Be739Bb1aAc99751a58d46b290d50",
+  "network": "Coston2",
+  "chainId": 114,
+  "deploymentTime": "2025-12-07T01:18:10.997Z",
+  "blockExplorer": "https://coston2-explorer.flare.network/address/0x3bE24594e9c7d3386AbFa26Ccc6E57e2A8EaAE4e",
+  "maxMembers": 6,
+  "collateralPercent": 10,
+  "epic": "Epic 3 - ROSCA Smart Contract Foundation"
+}
