@@ -130,68 +130,7 @@ npx hardhat node
 
 ---
 
-## 📋 Epic 1 Status: Environment Setup ✅
 
-### Completed Tasks
-- [x] **TASK-001:** Install Development Dependencies ✅
-- [x] **TASK-002:** Configure Flare Coston2 Testnet in Hardhat ✅
-- [x] **TASK-003:** Set Up MetaMask with Coston2 Testnet ⏳
-  - MetaMask wallet provided: `0xb8b38373324be739bb1aac99751a58d46b290d50`
-  - **ACTION REQUIRED:** Add private key to `.env`
-- [x] **TASK-004:** Obtain Test FLR from Faucet ⏳
-  - **ACTION REQUIRED:** Get tokens from faucet
-- [x] **TASK-005:** Deploy Hello World Contract to Coston2 ⏳
-  - Deployment script ready
-  - **BLOCKED:** Waiting for private key + tokens
-- [x] **TASK-006:** Install Flare Solidity Periphery Package ✅
-
-**Progress:** 4/6 tasks complete (67%)
-
----
-
-## 🗺️ Roadmap
-
-### ✅ Epic 1: Environment Setup & Flare Integration (Current)
-- Install Hardhat and dependencies
-- Configure Coston2 network
-- Deploy test contract
-
-### ⏳ Epic 2: FTSO Price Feed Integration (Next)
-- Create FTSO interface contract
-- Deploy FTSO Price Reader
-- Query real-time FLR/USD prices
-
-### ⏳ Epic 3: ROSCA Smart Contract - Foundation
-- Review WeTrust ROSCA contracts
-- Create NexusCircle.sol skeleton
-- Implement pool creation and joining
-
-### ⏳ Epic 4: ROSCA Smart Contract - Core Logic
-- Contribution system
-- Payout execution
-- Round-robin selection
-
-### ⏳ Epic 5: Flare-Specific Features
-- Collateral locking with FTSO
-- Default detection
-- Collateral liquidation
-
-### ⏳ Epic 6: Testing & Deployment
-- Unit tests for all functions
-- Deploy to Coston2
-- End-to-end testing
-
-### ⏳ Epic 7: React Frontend
-- Wallet connection
-- Pool dashboard
-- Join/contribute interface
-
-### ⏳ Epic 8: Final Polish & Demo
-- Documentation
-- Demo video
-- Hackathon submission
-
----
 
 ## 🧪 Testing
 
